@@ -7,8 +7,7 @@ require 'minitest/autorun'
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 
-require 'blacklist_validator'
-require 'email_format_validator'
+require 'valid8ors'
 
 class TestModel
   include ActiveModel::Validations

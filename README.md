@@ -39,7 +39,7 @@ You can translate (or overload) the default message via for e.g. using activerec
 ### Tests
 
     cd test
-    ruby blacklist_validator_test.rb
+    ruby blacklist_test.rb
 
 ## Email Format Validator
 
@@ -64,7 +64,7 @@ You can translate (or overload) the default message via for e.g. (in english): "
 ### Tests
 
     cd test
-    ruby email_format_validator_test.rb
+    ruby email_format_test.rb
 
 ### Credits
 
