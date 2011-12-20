@@ -4,8 +4,8 @@ $:.push File.expand_path("../lib", __FILE__)
 Gem::Specification.new do |s|
   s.name        = "valid8ors"
   s.version     = "0.0.3"
-  s.authors     = ["Axel Vergult"]
-  s.email       = ["axel@official.fm"]
+  s.authors     = ["Axel Vergult", "Vincent Pochet"]
+  s.email       = ["axel@official.fm", "vincent@official.fm"]
   s.homepage    = ""
   s.summary     = %q{Rails 3 awesome custom validators}
   s.description = %q{Rails 3 awesome custom validators}
