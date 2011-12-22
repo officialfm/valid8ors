@@ -70,6 +70,31 @@ You can translate (or overload) the default message via for e.g. (in english): "
 
 Regular Expression tests based on [Comparing E-mail Address Validating Regular Expressions](http://fightingforalostcause.net/misc/2006/compare-email-regex.php)
 
+## Url Format Validator
+
+### Usage
+
+Add the following to one of your models:
+
+    validates :url, url_format: true
+
+You can also modify the default message ("is improperly formatted") if validation fails:
+
+    validates :url, url_format: { message: "is not well formatted" }
+
+### I18n
+
+If you use I18n, the default key to translate is :improperly_formatted. So if you add to your User model:
+
+    validates :url, url_format: true
+
+You can translate (or overload) the default message via for e.g. (in english): "en.activerecord.errors.models.user.attributes.url.improperly_formatted"
+
+### Tests
+
+    cd test
+    ruby url_format_test.rb
+
 ## Compatibility
 
 Ruby 1.8 is not supported.
