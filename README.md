@@ -51,7 +51,7 @@ Add the following to one of your models:
 
 You can also modify the default message ("is reserved") if validation fails:
 
-    validates :name, blacklist: { message: "is not part of the whitelist" }
+    validates :name, reserved: { message: "is not part of the whitelist" }
 
 ### Reserved file
 
