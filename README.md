@@ -40,6 +40,35 @@ You can translate (or overload) the default message via for e.g. using activerec
 
     cd test
     ruby blacklist_test.rb
+    
+## Reserved Validator
+
+### Usage
+
+Add the following to one of your models:
+
+    validates :name, reserved: true
+
+You can also modify the default message ("is reserved") if validation fails:
+
+    validates :name, blacklist: { message: "is not part of the whitelist" }
+
+### Reserved file
+
+You can create a reserved.yml file in the config directory of your Rails application if you need to overload the one used by this gem.
+
+### I18n
+
+If you use I18n, the default key to translate is :reserved. So if you add to your User model:
+
+    validates :name, reserved: true
+
+You can translate (or overload) the default message via for e.g. using activerecord (in english): "en.activerecord.errors.models.user.attributes.name.reserved"
+
+### Tests
+
+    cd test
+    ruby reserved_test.rb
 
 ## Email Format Validator
 
