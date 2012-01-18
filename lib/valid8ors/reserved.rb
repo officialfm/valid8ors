@@ -24,7 +24,7 @@ class ReservedValidator < ActiveModel::EachValidator
   end
 
   def reserved?(str)
-    reserved.any? { |pattern| str.downcase == pattern.downcase }
+    reserved.any? { |pattern| str and str.downcase == pattern.downcase }
   end
 
   def reserved_file
