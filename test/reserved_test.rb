@@ -10,7 +10,7 @@ class TestUserWithMessage < TestModel
   validates :name, reserved: { message: 'is not part of the whitelist' }
 end
 
-class TestBlacklistValidator < MiniTest::Unit::TestCase
+class TestReservedValidator < MiniTest::Unit::TestCase
 
   def test_some_reserved_words
     names_that_should_be_reserved.each do |name|
@@ -25,13 +25,13 @@ class TestBlacklistValidator < MiniTest::Unit::TestCase
   end
 
   def test_default_message_on_error
-    test_user = TestUser.new(name: "about")
+    test_user = TestUser.new(name: "abOUt")
     refute test_user.valid?
     assert test_user.errors[:name].include?("is reserved")
   end
 
   def test_custom_message_on_error
-    test_user = TestUserWithMessage.new(name: "help")
+    test_user = TestUserWithMessage.new(name: "hElp")
     refute test_user.valid?
     assert test_user.errors[:name].include?("is not part of the whitelist")
   end
@@ -43,7 +43,7 @@ class TestBlacklistValidator < MiniTest::Unit::TestCase
   private
 
   def names_that_should_be_reserved
-    ["about", "faq", "help"]
+    ["About", "faq", "heLP"]
   end
 
   def names_that_should_be_not_reserved
