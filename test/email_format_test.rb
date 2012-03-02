@@ -86,7 +86,8 @@ class TestEmailFormatValidator < MiniTest::Unit::TestCase
         '-and-this-address-is-254-characters-exactly-so-it-should-be-valid-and-im-going-to-add-some-more' +
         '-words-here-to-increase-the-lenght-blah-blah-blah-blah-bla.org',
       # 'bracketed-IP-instead-of-domain@[127.0.0.1]',
-      'local@sub.domains.com'
+      'local@sub.domains.com',
+      'first+last@domain.com'
     ]
   end
 
