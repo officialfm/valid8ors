@@ -6,6 +6,10 @@ class TestUser < TestModel
   validates :email, email_format: true
 end
 
+class TestUserWithAcceptedEmailDomains < TestModel
+  validates :email, email_format: { accepted_domains: ['mail.com', 'subdomain.mail.com'] }
+end
+
 class TestUserAllowsNilEmailToTrue < TestModel
   validates :email, email_format: { allow_nil: true }
 end
@@ -26,6 +30,19 @@ class TestEmailFormatValidator < MiniTest::Unit::TestCase
 
   def test_invalid_emails
     invalid_emails.each { |email| refute TestUser.new(email: email).valid? }
+  end
+
+  def test_email_when_accepted_domains_option
+    valid_emails_with_correct_domains = ['user@mail.com', 'user@subdomain.mail.com']
+    valid_emails_with_incorrect_domains = ['user@gmail.com', 'user@subdomain.gmail.com']
+
+    valid_emails_with_correct_domains.each do |email|
+      assert TestUserWithAcceptedEmailDomains.new(email: email).valid?
+    end
+
+    valid_emails_with_incorrect_domains.each do |email|
+      refute TestUserWithAcceptedEmailDomains.new(email: email).valid?
+    end
   end
 
   def test_default_message_on_error
