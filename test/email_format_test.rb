@@ -6,15 +6,15 @@ class TestUser < TestModel
   validates :email, email_format: true
 end
 
-class TestUserAllowsNilToTrue < TestModel
+class TestUserAllowsNilEmailToTrue < TestModel
   validates :email, email_format: { allow_nil: true }
 end
 
-class TestUserAllowsNilToFalse < TestModel
+class TestUserAllowsNilEmailToFalse < TestModel
   validates :email, email_format: { allow_nil: false }
 end
 
-class TestUserWithMessage < TestModel
+class TestUserWithEmailMessage < TestModel
   validates :email, email_format: { message: 'is not well formatted' }
 end
 
@@ -35,7 +35,7 @@ class TestEmailFormatValidator < MiniTest::Unit::TestCase
   end
 
   def test_custom_message_on_error
-    test_user = TestUserWithMessage.new(email: "invalid_email@")
+    test_user = TestUserWithEmailMessage.new(email: "invalid_email@")
     refute test_user.valid?
     assert test_user.errors[:email].include?("is not well formatted")
   end
@@ -45,11 +45,11 @@ class TestEmailFormatValidator < MiniTest::Unit::TestCase
   end
 
   def test_nil_email_when_allow_nil_option_is_set_to_true
-    assert TestUserAllowsNilToTrue.new(email: nil).valid?
+    assert TestUserAllowsNilEmailToTrue.new(email: nil).valid?
   end
 
   def test_nil_email_when_allow_nil_option_is_set_to_false
-    refute TestUserAllowsNilToFalse.new(email: nil).valid?
+    refute TestUserAllowsNilEmailToFalse.new(email: nil).valid?
   end
 
   #######################
