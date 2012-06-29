@@ -20,10 +20,6 @@ Add the following to one of your models:
 
     validates :name, blacklist: true
 
-You can also modify the default message ("is blacklisted") if validation fails:
-
-    validates :name, blacklist: { message: "is not part of the whitelist" }
-
 ### Blacklist file
 
 You can create a blacklist.yml file in the config directory of your Rails application if you need to overload the one used by this gem.
@@ -48,10 +44,6 @@ You can translate (or overload) the default message via for e.g. using activerec
 Add the following to one of your models:
 
     validates :name, reserved: true
-
-You can also modify the default message ("is reserved") if validation fails:
-
-    validates :name, reserved: { message: "is not part of the whitelist" }
 
 ### Reserved file
 
@@ -107,10 +99,6 @@ Regular Expression tests based on [Comparing E-mail Address Validating Regular E
 Add the following to one of your models:
 
     validates :url, url_format: true
-
-You can also modify the default message ("is improperly formatted") if validation fails:
-
-    validates :url, url_format: { message: "is not well formatted" }
 
 ### I18n
 

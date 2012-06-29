@@ -6,10 +6,6 @@ class TestUser < TestModel
   validates :name, blacklist: true
 end
 
-class TestUserWithMessage < TestModel
-  validates :name, blacklist: { message: 'is not part of the whitelist' }
-end
-
 class TestBlacklistValidator < MiniTest::Unit::TestCase
 
   def test_some_blacklisted_words
@@ -28,12 +24,6 @@ class TestBlacklistValidator < MiniTest::Unit::TestCase
     test_user = TestUser.new(name: "Get up, fuck up")
     refute test_user.valid?
     assert test_user.errors[:name].include?("is blacklisted")
-  end
-
-  def test_custom_message_on_error
-    test_user = TestUserWithMessage.new(name: "Fuck it up")
-    refute test_user.valid?
-    assert test_user.errors[:name].include?("is not part of the whitelist")
   end
 
   #######################

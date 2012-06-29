@@ -6,7 +6,7 @@ class UrlFormatValidator < ActiveModel::EachValidator
 
   def validate_each(record, attribute, value)
     unless value =~ URL_PATTERN
-      record.errors.add(attribute, options[:message] || invalid_message(record, attribute))
+      record.errors.add(attribute, invalid_message(record, attribute))
     end
   end
 

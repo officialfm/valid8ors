@@ -14,10 +14,6 @@ class TestSiteAllowsNilToFalse < TestModel
   validates :url, url_format: { allow_nil: false }
 end
 
-class TestSiteWithMessage < TestModel
-  validates :url, url_format: { message: 'is not well formatted' }
-end
-
 class TestUrlFormatValidator < MiniTest::Unit::TestCase
 
   def test_valid_url
@@ -32,12 +28,6 @@ class TestUrlFormatValidator < MiniTest::Unit::TestCase
     test_site = TestSite.new(url: "invalid_url")
     refute test_site.valid?
     assert test_site.errors[:url].include?("is improperly formatted")
-  end
-
-  def test_custom_message_on_error
-    test_site = TestSiteWithMessage.new(url: "invalid_url")
-    refute test_site.valid?
-    assert test_site.errors[:url].include?("is not well formatted")
   end
 
   def test_nil_url_when_allow_nil_option_is_not_set

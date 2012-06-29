@@ -3,7 +3,7 @@
 class BlacklistValidator < ActiveModel::EachValidator
 
   def validate_each(record, attribute, value)
-    record.errors.add(attribute, options[:message] || invalid_message(record, attribute)) if blacklisted?(value)
+    record.errors.add(attribute, invalid_message(record, attribute)) if blacklisted?(value)
   end
 
   # Lazy load and transform directly words to patterns instead of creating regexps at each matching tests
