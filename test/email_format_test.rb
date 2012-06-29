@@ -6,8 +6,12 @@ class TestUser < TestModel
   validates :email, email_format: true
 end
 
-class TestUserWithAcceptedEmailDomains < TestModel
-  validates :email, email_format: { accepted_domains: ['mail.com', 'subdomain.mail.com'] }
+class TestUserWithEmailDomains < TestModel
+  validates :email, email_format: { domains: ['mail.com', 'subdomain.mail.com'] }
+end
+
+class TestUserWithEmailDomainsAndInvalidDomainMessage < TestModel
+  validates :email, email_format: { invalid_domain_message: 'incorrect domain', domains: ['mail.com', 'subdomain.mail.com'] }
 end
 
 class TestUserAllowsNilEmailToTrue < TestModel
@@ -32,17 +36,29 @@ class TestEmailFormatValidator < MiniTest::Unit::TestCase
     invalid_emails.each { |email| refute TestUser.new(email: email).valid? }
   end
 
-  def test_email_when_accepted_domains_option
+  def test_email_when_domains_option
     valid_emails_with_correct_domains = ['user@mail.com', 'user@subdomain.mail.com']
     valid_emails_with_incorrect_domains = ['user@gmail.com', 'user@subdomain.gmail.com']
 
     valid_emails_with_correct_domains.each do |email|
-      assert TestUserWithAcceptedEmailDomains.new(email: email).valid?
+      assert TestUserWithEmailDomains.new(email: email).valid?
     end
 
     valid_emails_with_incorrect_domains.each do |email|
-      refute TestUserWithAcceptedEmailDomains.new(email: email).valid?
+      refute TestUserWithEmailDomains.new(email: email).valid?
     end
+  end
+
+  def test_default_invalid_domain_message_on_error
+    test_user = TestUserWithEmailDomains.new(email: "user@gmail.com")
+    refute test_user.valid?
+    assert test_user.errors[:email].include?("can't be from this domain")
+  end
+
+  def test_custom_invalid_domain_message_on_error
+    test_user = TestUserWithEmailDomainsAndInvalidDomainMessage.new(email: "user@gmail.com")
+    refute test_user.valid?
+    assert test_user.errors[:email].include?("incorrect domain")
   end
 
   def test_default_message_on_error

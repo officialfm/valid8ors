@@ -18,7 +18,7 @@ class PasswordFormatValidator < ActiveModel::EachValidator
   private
 
   def invalid_message(record, attribute)
-    I18n.t  :improperly_formatted,
+    I18n.t  :insecure,
             scope:    "#{record.class.i18n_scope}.errors.models.#{record.class.model_name.i18n_key}.attributes.#{attribute}",
             default:  "is not strong enough"
   end

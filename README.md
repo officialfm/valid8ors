@@ -40,7 +40,7 @@ You can translate (or overload) the default message via for e.g. using activerec
 
     cd test
     ruby blacklist_test.rb
-    
+
 ## Reserved Validator
 
 ### Usage
@@ -82,9 +82,18 @@ You can also modify the default message ("is improperly formatted") if validatio
 
     validates :email, email_format: { message: "is not well formatted" }
 
+Restrict your validation to accept emails from specific domains only:
+
+    validates :email, email_format: { domains: ['gmail.com', 'live.com'] }
+
+You can also modify the default message ("can't be from this domain") if email's domain is rejected
+
+    validates :email, email_format: { invalid_domain_message: 'forbidden domain', domains: ['gmail.com', 'live.com'] }
+
 ### I18n
 
-If you use I18n, the default key to translate is :improperly_formatted. So if you add to your User model:
+If you use I18n, the default keys to translate are :improperly_formatted (for the incorrect email message) and :invalid_domain (for the blacklisted domain email message).
+So if you add to your User model:
 
     validates :email, email_format: true
 
@@ -123,6 +132,34 @@ You can translate (or overload) the default message via for e.g. (in english): "
 
     cd test
     ruby url_format_test.rb
+
+## Password Format Validator
+
+Check if a password contains at least a lower case letter, an upper case letter and a digit.
+Password length validation is not included here as you can use Rails' builtin "LengthValidator".
+
+### Usage
+
+Add the following to one of your models:
+
+    validates :password, password_format: true
+
+You can also modify the default message ("is not strong enough") if validation fails:
+
+    validates :password, password_format: { message: "isn't secure" }
+
+### I18n
+
+If you use I18n, the default key to translate is :insecure. So if you add to your User model:
+
+    validates :password, password_format: true
+
+You can translate (or overload) the default message via for e.g. (in english): "en.activerecord.errors.models.user.attributes.password.insecure"
+
+### Tests
+
+    cd test
+    ruby password_format_test.rb
 
 ## Compatibility
 
