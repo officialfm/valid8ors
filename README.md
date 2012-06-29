@@ -78,21 +78,13 @@ Add the following to one of your models:
 
     validates :email, email_format: true
 
-You can also modify the default message ("is improperly formatted") if validation fails:
-
-    validates :email, email_format: { message: "is not well formatted" }
-
 Restrict your validation to accept emails from specific domains only:
 
     validates :email, email_format: { domains: ['gmail.com', 'live.com'] }
 
-You can also modify the default message ("can't be from this domain") if email's domain is rejected
-
-    validates :email, email_format: { invalid_domain_message: 'forbidden domain', domains: ['gmail.com', 'live.com'] }
-
 ### I18n
 
-If you use I18n, the default keys to translate are :improperly_formatted (for the incorrect email message) and :invalid_domain (for the blacklisted domain email message).
+Default keys to translate are :improperly_formatted (when not an email format) and :invalid_domain (when email domain not listed in "domains" option).
 So if you add to your User model:
 
     validates :email, email_format: true
@@ -133,7 +125,7 @@ You can translate (or overload) the default message via for e.g. (in english): "
     cd test
     ruby url_format_test.rb
 
-## Password Format Validator
+## Password Strength Validator
 
 Check if a password contains at least a lower case letter, an upper case letter and a digit.
 Password length validation is not included here as you can use Rails' builtin "LengthValidator".
@@ -142,24 +134,20 @@ Password length validation is not included here as you can use Rails' builtin "L
 
 Add the following to one of your models:
 
-    validates :password, password_format: true
-
-You can also modify the default message ("is not strong enough") if validation fails:
-
-    validates :password, password_format: { message: "isn't secure" }
+    validates :password, password_strength: true
 
 ### I18n
 
-If you use I18n, the default key to translate is :insecure. So if you add to your User model:
+The default key to translate is :insecure. So if you add to your User model:
 
-    validates :password, password_format: true
+    validates :password, password_strength: true
 
 You can translate (or overload) the default message via for e.g. (in english): "en.activerecord.errors.models.user.attributes.password.insecure"
 
 ### Tests
 
     cd test
-    ruby password_format_test.rb
+    ruby password_strength_test.rb
 
 ## Compatibility
 

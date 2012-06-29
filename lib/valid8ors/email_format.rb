@@ -7,10 +7,10 @@ class EmailFormatValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     if matching = EMAIL_PATTERN.match(value)
       if options[:domains] && !options[:domains].include?(matching[:domain])
-        record.errors.add(attribute, options[:invalid_domain_message] || invalid_domain_message(record, attribute))
+        record.errors.add(attribute, invalid_domain_message(record, attribute))
       end
     else
-      record.errors.add(attribute, options[:message] || invalid_message(record, attribute))
+      record.errors.add(attribute, invalid_message(record, attribute))
     end
   end
 

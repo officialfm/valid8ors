@@ -10,20 +10,12 @@ class TestUserWithEmailDomains < TestModel
   validates :email, email_format: { domains: ['mail.com', 'subdomain.mail.com'] }
 end
 
-class TestUserWithEmailDomainsAndInvalidDomainMessage < TestModel
-  validates :email, email_format: { invalid_domain_message: 'incorrect domain', domains: ['mail.com', 'subdomain.mail.com'] }
-end
-
 class TestUserAllowsNilEmailToTrue < TestModel
   validates :email, email_format: { allow_nil: true }
 end
 
 class TestUserAllowsNilEmailToFalse < TestModel
   validates :email, email_format: { allow_nil: false }
-end
-
-class TestUserWithEmailMessage < TestModel
-  validates :email, email_format: { message: 'is not well formatted' }
 end
 
 class TestEmailFormatValidator < MiniTest::Unit::TestCase
@@ -55,22 +47,10 @@ class TestEmailFormatValidator < MiniTest::Unit::TestCase
     assert test_user.errors[:email].include?("can't be from this domain")
   end
 
-  def test_custom_invalid_domain_message_on_error
-    test_user = TestUserWithEmailDomainsAndInvalidDomainMessage.new(email: "user@gmail.com")
-    refute test_user.valid?
-    assert test_user.errors[:email].include?("incorrect domain")
-  end
-
   def test_default_message_on_error
     test_user = TestUser.new(email: "invalid_email@")
     refute test_user.valid?
     assert test_user.errors[:email].include?("is improperly formatted")
-  end
-
-  def test_custom_message_on_error
-    test_user = TestUserWithEmailMessage.new(email: "invalid_email@")
-    refute test_user.valid?
-    assert test_user.errors[:email].include?("is not well formatted")
   end
 
   def test_nil_email_when_allow_nil_option_is_not_set

@@ -1,13 +1,13 @@
 # -*- encoding: utf-8 -*-
 
-class PasswordFormatValidator < ActiveModel::EachValidator
+class PasswordStrengthValidator < ActiveModel::EachValidator
 
   # It must contain a lower case letter, an upper case letter and a digit
   PASSWORD_PATTERN = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/
 
   def validate_each(record, attribute, value)
     unless value =~ PASSWORD_PATTERN
-      record.errors.add(attribute, options[:message] || invalid_message(record, attribute))
+      record.errors.add(attribute, invalid_message(record, attribute))
     end
   end
 

@@ -3,19 +3,15 @@
 require_relative 'test_helper'
 
 class TestUser < TestModel
-  validates :password, password_format: true
+  validates :password, password_strength: true
 end
 
 class TestUserAllowsNilPasswordToTrue < TestModel
-  validates :password, password_format: { allow_nil: true }
+  validates :password, password_strength: { allow_nil: true }
 end
 
 class TestUserAllowsNilPasswordToFalse < TestModel
-  validates :password, password_format: { allow_nil: false }
-end
-
-class TestUserWithPasswordMessage < TestModel
-  validates :password, password_format: { message: 'is not well formatted' }
+  validates :password, password_strength: { allow_nil: false }
 end
 
 class TestPasswordFormatValidator < MiniTest::Unit::TestCase
@@ -32,12 +28,6 @@ class TestPasswordFormatValidator < MiniTest::Unit::TestCase
     test_user = TestUser.new(password: "invalid_password")
     refute test_user.valid?
     assert test_user.errors[:password].include?("is not strong enough")
-  end
-
-  def test_custom_message_on_error
-    test_user = TestUserWithPasswordMessage.new(password: "invalid_password")
-    refute test_user.valid?
-    assert test_user.errors[:password].include?("is not well formatted")
   end
 
   def test_nil_password_when_allow_nil_option_is_not_set
