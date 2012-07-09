@@ -27,7 +27,7 @@ class TestPasswordFormatValidator < MiniTest::Unit::TestCase
   def test_default_message_on_error
     test_user = TestUser.new(password: "invalid_password")
     refute test_user.valid?
-    assert test_user.errors[:password].include?("is not strong enough")
+    assert test_user.errors[:password].include?("is not strong enough. It should contain at least a digit, lowercase and uppercase letter.")
   end
 
   def test_nil_password_when_allow_nil_option_is_not_set

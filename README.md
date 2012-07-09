@@ -115,7 +115,7 @@ You can translate (or overload) the default message via for e.g. (in english): "
 
 ## Password Strength Validator
 
-Check if a password contains at least a lower case letter, an upper case letter and a digit.
+Check if a password contains at least a digit, lowercase and uppercase letter.
 Password length validation is not included here as you can use Rails' builtin "LengthValidator".
 
 ### Usage

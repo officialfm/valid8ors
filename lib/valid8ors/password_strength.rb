@@ -2,7 +2,7 @@
 
 class PasswordStrengthValidator < ActiveModel::EachValidator
 
-  # It must contain a lower case letter, an upper case letter and a digit
+  # Password must contain at least a digit, lowercase and uppercase letter.
   PASSWORD_PATTERN = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).*$/
 
   def validate_each(record, attribute, value)
@@ -20,7 +20,7 @@ class PasswordStrengthValidator < ActiveModel::EachValidator
   def invalid_message(record, attribute)
     I18n.t  :insecure,
             scope:    "#{record.class.i18n_scope}.errors.models.#{record.class.model_name.i18n_key}.attributes.#{attribute}",
-            default:  "is not strong enough"
+            default:  "is not strong enough. It should contain at least a digit, lowercase and uppercase letter."
   end
 
 end
