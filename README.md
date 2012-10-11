@@ -14,47 +14,47 @@ Then run:
 
 ## Blacklist Validator
 
+Check that an attribute doesn't contain blacklisted values.
+
 ### Usage
 
-Add the following to one of your models:
-
 ```ruby
+class User < ActiveRecord::Base
   validates :name, blacklist: true
+end
 ```
 
 ### Blacklist file
 
 You can create a blacklist.yml file in the config directory of your Rails application if you need to overload the one used by this gem.
 
-### I18n
+### I18n error message
 
-If you use I18n, the default key to translate is :blacklisted. So if you add to your User model:
-
-    validates :name, blacklist: true
-
-You can translate (or overload) the default message via for e.g. using activerecord (in english):
+Key to translate: **:blacklisted**
+Hence, considering the example above, the translation path would be:
 
     en.activerecord.errors.models.user.attributes.name.blacklisted
 
 ## Reserved Validator
 
+Validate an attribute against a reserved list of values.
+
 ### Usage
 
-Add the following to one of your models:
-
-    validates :name, reserved: true
+```ruby
+class User < ActiveRecord::Base
+  validates :name, reserved: true
+end
+```
 
 ### Reserved file
 
 You can create a reserved.yml file in the config directory of your Rails application if you need to overload the one used by this gem.
 
-### I18n
+### I18n error message
 
-If you use I18n, the default key to translate is :reserved. So if you add to your User model:
-
-    validates :name, reserved: true
-
-You can translate (or overload) the default message via for e.g. using activerecord (in english):
+Key to translate: **:reserved**
+Hence, considering the example above, the translation path would be:
 
     en.activerecord.errors.models.user.attributes.name.reserved
 
@@ -62,24 +62,27 @@ You can translate (or overload) the default message via for e.g. using activerec
 
 ### Usage
 
-Add the following to one of your models:
+```ruby
+class User < ActiveRecord::Base
+  validates :email, email_format: true
+end
+```
 
-    validates :email, email_format: true
+Restrict your validation to specific domains:
 
-Restrict your validation to accept emails from specific domains only:
+```ruby
+class User < ActiveRecord::Base
+  validates :email, email_format: { domains: ['gmail.com', 'live.com'] }
+end
+```
 
-    validates :email, email_format: { domains: ['gmail.com', 'live.com'] }
+### I18n error messages
 
-### I18n
-
-Default keys to translate are :improperly_formatted (when not an email format) and :invalid_domain (when email domain not listed in "domains" option).
-So if you add to your User model:
-
-    validates :email, email_format: true
-
-You can translate (or overload) the default message via for e.g. (in english):
+Keys to translate: **:improperly_formatted** (when not an email format) and **invalid_domain** (when email domain not listed in "domains" option).
+Hence, considering the two examples above, translation paths would be:
 
     en.activerecord.errors.models.user.attributes.email.improperly_formatted
+    en.activerecord.errors.models.user.attributes.email.invalid_domain
 
 ### Credits
 
@@ -89,17 +92,16 @@ Regular Expression tests based on [Comparing E-mail Address Validating Regular E
 
 ### Usage
 
-Add the following to one of your models:
+```ruby
+class User < ActiveRecord::Base
+  validates :url, url_format: true
+end
+```
 
-    validates :url, url_format: true
+### I18n error message
 
-### I18n
-
-If you use I18n, the default key to translate is :improperly_formatted. So if you add to your User model:
-
-    validates :url, url_format: true
-
-You can translate (or overload) the default message via for e.g. (in english):
+Key to translate: **:improperly_formatted**
+Hence, considering the example above, the translation path would be:
 
     en.activerecord.errors.models.user.attributes.url.improperly_formatted
 
@@ -112,39 +114,41 @@ Password length validation is not included here as you can use Rails' builtin "L
 
 Add the following to one of your models:
 
-    validates :password, password_strength: true
+```ruby
+class User < ActiveRecord::Base
+  validates :password, password_strength: true
+end
+```
 
-### I18n
+### I18n error message
 
-The default key to translate is :insecure. So if you add to your User model:
-
-    validates :password, password_strength: true
-
-You can translate (or overload) the default message via for e.g. (in english):
+Key to translate: **:insecure**
+Hence, considering the example above, the translation path would be:
 
     en.activerecord.errors.models.user.attributes.password.insecure
 
 ## Absence Validator
 
-By default, checks if an attribute is nil.
-Pass allow_blank option to accept empty objects.
+By default, checks if an attribute is nil. Use allow_blank option to accept empty objects.
 
 ### Usage
 
 Add the following to one of your models:
 
-    validates :name, absence: true                  # Validate name is nil
-    validates :name, absence: { allow_blank: true } # Validate name is blank
+```ruby
+class User < ActiveRecord::Base
+  validates :name,  absence: true                  # Validate name is nil
+  validates :email, absence: { allow_blank: true } # Validate email is blank
+end
+```
 
-### I18n
+### I18n error message
 
-The default key to translate is :not_absent. So if you add to your User model:
-
-    validates :name, absence: true
-
-You can translate (or overload) the default message via for e.g. (in english):
+Key to translate: **:not_absent**
+Hence, considering the example above, translation paths would be:
 
     en.activerecord.errors.models.user.attributes.name.not_absent
+    en.activerecord.errors.models.user.attributes.email.not_absent
 
 ## Tests
 
