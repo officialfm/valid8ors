@@ -30,7 +30,7 @@ You can create a blacklist.yml file in the config directory of your Rails applic
 
 ### I18n error message
 
-Key to translate: **:blacklisted**
+Key to translate: **:blacklisted**.
 Hence, considering the example above, the translation path would be:
 
     en.activerecord.errors.models.user.attributes.name.blacklisted
@@ -53,7 +53,7 @@ You can create a reserved.yml file in the config directory of your Rails applica
 
 ### I18n error message
 
-Key to translate: **:reserved**
+Key to translate: **:reserved**.
 Hence, considering the example above, the translation path would be:
 
     en.activerecord.errors.models.user.attributes.name.reserved
@@ -100,7 +100,7 @@ end
 
 ### I18n error message
 
-Key to translate: **:improperly_formatted**
+Key to translate: **:improperly_formatted**.
 Hence, considering the example above, the translation path would be:
 
     en.activerecord.errors.models.user.attributes.url.improperly_formatted
@@ -112,8 +112,6 @@ Password length validation is not included here as you can use Rails' builtin "L
 
 ### Usage
 
-Add the following to one of your models:
-
 ```ruby
 class User < ActiveRecord::Base
   validates :password, password_strength: true
@@ -122,7 +120,7 @@ end
 
 ### I18n error message
 
-Key to translate: **:insecure**
+Key to translate: **:insecure**.
 Hence, considering the example above, the translation path would be:
 
     en.activerecord.errors.models.user.attributes.password.insecure
@@ -133,8 +131,6 @@ By default, checks if an attribute is nil. Use allow_blank option to accept empt
 
 ### Usage
 
-Add the following to one of your models:
-
 ```ruby
 class User < ActiveRecord::Base
   validates :name,  absence: true                  # Validate name is nil
@@ -144,7 +140,7 @@ end
 
 ### I18n error message
 
-Key to translate: **:not_absent**
+Key to translate: **:not_absent**.
 Hence, considering the example above, translation paths would be:
 
     en.activerecord.errors.models.user.attributes.name.not_absent
