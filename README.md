@@ -137,6 +137,31 @@ You can translate (or overload) the default message via for e.g. (in english): "
     cd test
     ruby password_strength_test.rb
 
+## Absence Validator
+
+By default, checks if an attribute is nil.
+Pass allow_blank option to accept empty objects.
+
+### Usage
+
+Add the following to one of your models:
+
+    validates :name, absence: true                  # Validate name is nil
+    validates :name, absence: { allow_blank: true } # Validate name is blank
+
+### I18n
+
+The default key to translate is :not_absent. So if you add to your User model:
+
+    validates :name, absence: true
+
+You can translate (or overload) the default message via for e.g. (in english): "en.activerecord.errors.models.user.attributes.name.not_absent"
+
+### Tests
+
+    cd test
+    ruby absence_test.rb
+
 ## Compatibility
 
 Ruby 1.8 is not supported.
