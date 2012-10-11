@@ -78,7 +78,7 @@ end
 
 ### I18n error messages
 
-Keys to translate: **:improperly_formatted** (when not an email format) and **invalid_domain** (when email domain not listed in "domains" option).
+Keys to translate: **:improperly_formatted** (when not an email format) and **:invalid_domain** (when email domain not listed in "domains" option).
 Hence, considering the two examples above, translation paths would be:
 
     en.activerecord.errors.models.user.attributes.email.improperly_formatted
