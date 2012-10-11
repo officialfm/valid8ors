@@ -2,30 +2,30 @@
 
 require_relative 'test_helper'
 
-class TestUser < TestModel
-  validates :email, email_format: true
-end
-
-class TestUserWithEmailDomains < TestModel
-  validates :email, email_format: { domains: ['mail.com', 'subdomain.mail.com'] }
-end
-
-class TestUserAllowsNilEmailToTrue < TestModel
-  validates :email, email_format: { allow_nil: true }
-end
-
-class TestUserAllowsNilEmailToFalse < TestModel
-  validates :email, email_format: { allow_nil: false }
-end
-
 class TestEmailFormatValidator < MiniTest::Unit::TestCase
 
+  class User < TestModel
+    validates :email, email_format: true
+  end
+
+  class UserWithEmailDomains < TestModel
+    validates :email, email_format: { domains: ['mail.com', 'subdomain.mail.com'] }
+  end
+
+  class UserAllowsNilEmailToTrue < TestModel
+    validates :email, email_format: { allow_nil: true }
+  end
+
+  class UserAllowsNilEmailToFalse < TestModel
+    validates :email, email_format: { allow_nil: false }
+  end
+
   def test_valid_emails
-    valid_emails.each { |email| assert TestUser.new(email: email).valid? }
+    valid_emails.each { |email| assert User.new(email: email).valid? }
   end
 
   def test_invalid_emails
-    invalid_emails.each { |email| refute TestUser.new(email: email).valid? }
+    invalid_emails.each { |email| refute User.new(email: email).valid? }
   end
 
   def test_email_when_domains_option
@@ -33,36 +33,36 @@ class TestEmailFormatValidator < MiniTest::Unit::TestCase
     valid_emails_with_incorrect_domains = ['user@gmail.com', 'user@subdomain.gmail.com']
 
     valid_emails_with_correct_domains.each do |email|
-      assert TestUserWithEmailDomains.new(email: email).valid?
+      assert UserWithEmailDomains.new(email: email).valid?
     end
 
     valid_emails_with_incorrect_domains.each do |email|
-      refute TestUserWithEmailDomains.new(email: email).valid?
+      refute UserWithEmailDomains.new(email: email).valid?
     end
   end
 
   def test_default_invalid_domain_message_on_error
-    test_user = TestUserWithEmailDomains.new(email: "user@gmail.com")
-    refute test_user.valid?
-    assert test_user.errors[:email].include?("can't be from this domain")
+    user = UserWithEmailDomains.new(email: "user@gmail.com")
+    refute user.valid?
+    assert user.errors[:email].include?("can't be from this domain")
   end
 
   def test_default_message_on_error
-    test_user = TestUser.new(email: "invalid_email@")
-    refute test_user.valid?
-    assert test_user.errors[:email].include?("is improperly formatted")
+    user = User.new(email: "invalid_email@")
+    refute user.valid?
+    assert user.errors[:email].include?("is improperly formatted")
   end
 
   def test_nil_email_when_allow_nil_option_is_not_set
-    refute TestUser.new(email: nil).valid?
+    refute User.new(email: nil).valid?
   end
 
   def test_nil_email_when_allow_nil_option_is_set_to_true
-    assert TestUserAllowsNilEmailToTrue.new(email: nil).valid?
+    assert UserAllowsNilEmailToTrue.new(email: nil).valid?
   end
 
   def test_nil_email_when_allow_nil_option_is_set_to_false
-    refute TestUserAllowsNilEmailToFalse.new(email: nil).valid?
+    refute UserAllowsNilEmailToFalse.new(email: nil).valid?
   end
 
   #######################

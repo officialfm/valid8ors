@@ -32,11 +32,6 @@ If you use I18n, the default key to translate is :blacklisted. So if you add to 
 
 You can translate (or overload) the default message via for e.g. using activerecord (in english): "en.activerecord.errors.models.user.attributes.name.blacklisted"
 
-### Tests
-
-    cd test
-    ruby blacklist_test.rb
-
 ## Reserved Validator
 
 ### Usage
@@ -56,11 +51,6 @@ If you use I18n, the default key to translate is :reserved. So if you add to you
     validates :name, reserved: true
 
 You can translate (or overload) the default message via for e.g. using activerecord (in english): "en.activerecord.errors.models.user.attributes.name.reserved"
-
-### Tests
-
-    cd test
-    ruby reserved_test.rb
 
 ## Email Format Validator
 
@@ -83,11 +73,6 @@ So if you add to your User model:
 
 You can translate (or overload) the default message via for e.g. (in english): "en.activerecord.errors.models.user.attributes.email.improperly_formatted"
 
-### Tests
-
-    cd test
-    ruby email_format_test.rb
-
 ### Credits
 
 Regular Expression tests based on [Comparing E-mail Address Validating Regular Expressions](http://fightingforalostcause.net/misc/2006/compare-email-regex.php)
@@ -108,11 +93,6 @@ If you use I18n, the default key to translate is :improperly_formatted. So if yo
 
 You can translate (or overload) the default message via for e.g. (in english): "en.activerecord.errors.models.user.attributes.url.improperly_formatted"
 
-### Tests
-
-    cd test
-    ruby url_format_test.rb
-
 ## Password Strength Validator
 
 Check if a password contains at least a digit, lowercase and uppercase letter.
@@ -131,11 +111,6 @@ The default key to translate is :insecure. So if you add to your User model:
     validates :password, password_strength: true
 
 You can translate (or overload) the default message via for e.g. (in english): "en.activerecord.errors.models.user.attributes.password.insecure"
-
-### Tests
-
-    cd test
-    ruby password_strength_test.rb
 
 ## Absence Validator
 
@@ -157,10 +132,9 @@ The default key to translate is :not_absent. So if you add to your User model:
 
 You can translate (or overload) the default message via for e.g. (in english): "en.activerecord.errors.models.user.attributes.name.not_absent"
 
-### Tests
+## Tests
 
-    cd test
-    ruby absence_test.rb
+    rake test
 
 ## Compatibility
 

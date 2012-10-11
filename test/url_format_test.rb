@@ -2,44 +2,44 @@
 
 require_relative 'test_helper'
 
-class TestSite < TestModel
-  validates :url, url_format: true
-end
-
-class TestSiteAllowsNilToTrue < TestModel
-  validates :url, url_format: { allow_nil: true }
-end
-
-class TestSiteAllowsNilToFalse < TestModel
-  validates :url, url_format: { allow_nil: false }
-end
-
 class TestUrlFormatValidator < MiniTest::Unit::TestCase
 
+  class Site < TestModel
+    validates :url, url_format: true
+  end
+
+  class SiteAllowsNilToTrue < TestModel
+    validates :url, url_format: { allow_nil: true }
+  end
+
+  class SiteAllowsNilToFalse < TestModel
+    validates :url, url_format: { allow_nil: false }
+  end
+
   def test_valid_url
-    valid_urls.each { |url| assert TestSite.new(url: url).valid? }
+    valid_urls.each { |url| assert Site.new(url: url).valid? }
   end
 
   def test_invalid_url
-    invalid_urls.each { |url| refute TestSite.new(url: url).valid? }
+    invalid_urls.each { |url| refute Site.new(url: url).valid? }
   end
 
   def test_default_message_on_error
-    test_site = TestSite.new(url: "invalid_url")
-    refute test_site.valid?
-    assert test_site.errors[:url].include?("is improperly formatted")
+    site = Site.new(url: "invalid_url")
+    refute site.valid?
+    assert site.errors[:url].include?("is improperly formatted")
   end
 
   def test_nil_url_when_allow_nil_option_is_not_set
-    refute TestSite.new(url: nil).valid?
+    refute Site.new(url: nil).valid?
   end
 
   def test_nil_url_when_allow_nil_option_is_set_to_true
-    assert TestSiteAllowsNilToTrue.new(url: nil).valid?
+    assert SiteAllowsNilToTrue.new(url: nil).valid?
   end
 
   def test_nil_url_when_allow_nil_option_is_set_to_false
-    refute TestSiteAllowsNilToFalse.new(url: nil).valid?
+    refute SiteAllowsNilToFalse.new(url: nil).valid?
   end
 
   #######################

@@ -2,28 +2,28 @@
 
 require_relative 'test_helper'
 
-class TestUser < TestModel
-  validates :name, blacklist: true
-end
-
 class TestBlacklistValidator < MiniTest::Unit::TestCase
+
+  class User < TestModel
+    validates :name, blacklist: true
+  end
 
   def test_some_blacklisted_words
     names_that_should_be_blacklisted.each do |name|
-      test_user = TestUser.new(name: name)
-      refute test_user.valid?
-      assert test_user.errors[:name]
+      user = User.new(name: name)
+      refute user.valid?
+      assert user.errors[:name]
     end
   end
 
   def test_some_whitelisted_words
-    names_that_should_be_whitelisted.each { |name| assert TestUser.new(name: name).valid? }
+    names_that_should_be_whitelisted.each { |name| assert User.new(name: name).valid? }
   end
 
   def test_default_message_on_error
-    test_user = TestUser.new(name: "Get up, fuck up")
-    refute test_user.valid?
-    assert test_user.errors[:name].include?("is blacklisted")
+    user = User.new(name: "Get up, fuck up")
+    refute user.valid?
+    assert user.errors[:name].include?("is blacklisted")
   end
 
   #######################
