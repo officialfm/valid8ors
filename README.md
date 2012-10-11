@@ -18,7 +18,9 @@ Then run:
 
 Add the following to one of your models:
 
-    validates :name, blacklist: true
+```ruby
+  validates :name, blacklist: true
+```
 
 ### Blacklist file
 
@@ -30,7 +32,9 @@ If you use I18n, the default key to translate is :blacklisted. So if you add to 
 
     validates :name, blacklist: true
 
-You can translate (or overload) the default message via for e.g. using activerecord (in english): "en.activerecord.errors.models.user.attributes.name.blacklisted"
+You can translate (or overload) the default message via for e.g. using activerecord (in english):
+
+    en.activerecord.errors.models.user.attributes.name.blacklisted
 
 ## Reserved Validator
 
@@ -50,7 +54,9 @@ If you use I18n, the default key to translate is :reserved. So if you add to you
 
     validates :name, reserved: true
 
-You can translate (or overload) the default message via for e.g. using activerecord (in english): "en.activerecord.errors.models.user.attributes.name.reserved"
+You can translate (or overload) the default message via for e.g. using activerecord (in english):
+
+    en.activerecord.errors.models.user.attributes.name.reserved
 
 ## Email Format Validator
 
@@ -71,7 +77,9 @@ So if you add to your User model:
 
     validates :email, email_format: true
 
-You can translate (or overload) the default message via for e.g. (in english): "en.activerecord.errors.models.user.attributes.email.improperly_formatted"
+You can translate (or overload) the default message via for e.g. (in english):
+
+    en.activerecord.errors.models.user.attributes.email.improperly_formatted
 
 ### Credits
 
@@ -91,7 +99,9 @@ If you use I18n, the default key to translate is :improperly_formatted. So if yo
 
     validates :url, url_format: true
 
-You can translate (or overload) the default message via for e.g. (in english): "en.activerecord.errors.models.user.attributes.url.improperly_formatted"
+You can translate (or overload) the default message via for e.g. (in english):
+
+    en.activerecord.errors.models.user.attributes.url.improperly_formatted
 
 ## Password Strength Validator
 
@@ -110,7 +120,9 @@ The default key to translate is :insecure. So if you add to your User model:
 
     validates :password, password_strength: true
 
-You can translate (or overload) the default message via for e.g. (in english): "en.activerecord.errors.models.user.attributes.password.insecure"
+You can translate (or overload) the default message via for e.g. (in english):
+
+    en.activerecord.errors.models.user.attributes.password.insecure
 
 ## Absence Validator
 
@@ -130,7 +142,9 @@ The default key to translate is :not_absent. So if you add to your User model:
 
     validates :name, absence: true
 
-You can translate (or overload) the default message via for e.g. (in english): "en.activerecord.errors.models.user.attributes.name.not_absent"
+You can translate (or overload) the default message via for e.g. (in english):
+
+    en.activerecord.errors.models.user.attributes.name.not_absent
 
 ## Tests
 
@@ -138,4 +152,4 @@ You can translate (or overload) the default message via for e.g. (in english): "
 
 ## Compatibility
 
-Ruby 1.8 is not supported.
+Ruby version >= 1.9.x
