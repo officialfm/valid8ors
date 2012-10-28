@@ -133,7 +133,8 @@ class TestEmailFormatValidator < MiniTest::Unit::TestCase
       'unbracketed-IP@127.0.0.1',
       'invalid-ip@127.0.0.1.26',
       'another-invalid-ip@127.0.0.256',
-      'IP-and-port@127.0.0.1:25'
+      'IP-and-port@127.0.0.1:25',
+      'ends.with.dot.@bar.com'
     ]
   end
 
