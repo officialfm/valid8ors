@@ -2,7 +2,7 @@
 
 class EmailFormatValidator < ActiveModel::EachValidator
 
-  EMAIL_PATTERN = /\A[\w\-\+_\.]([.]?([\w\-\+_]+)*)?@(?<domain>(?:[\w\-\.]+\.)+[a-z]{2,})\Z/i
+  EMAIL_PATTERN = /\A[\w\-\+_]+(([.]?[\w\-\+_]+)*)?@(?<domain>(?:[\w\-\.]+\.)+[a-z]{2,})\Z/i
 
   def validate_each(record, attribute, value)
     if matching = EMAIL_PATTERN.match(value)

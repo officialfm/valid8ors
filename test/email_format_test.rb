@@ -100,7 +100,8 @@ class TestEmailFormatValidator < MiniTest::Unit::TestCase
         '-words-here-to-increase-the-lenght-blah-blah-blah-blah-bla.org',
       # 'bracketed-IP-instead-of-domain@[127.0.0.1]',
       'local@sub.domains.com',
-      'first+last@domain.com'
+      'first+last@domain.com',
+      'dots.in.the.middle@domain.com'
     ]
   end
 
